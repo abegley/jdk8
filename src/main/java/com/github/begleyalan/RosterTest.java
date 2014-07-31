@@ -138,6 +138,10 @@ public class RosterTest {
         System.out.println();
 
         //Approach 5:  Specify search criteria code with a Lambda expression
+        //The CheckPerson interface is a functional interface.  A functional interface is any interface that contains only
+        // one abstract method.  A functional interface may contain one or more 'default methods' or static methods.  Because
+        //a functional interface contains only one abstract method, you can omit the name of that method when you implement it.
+        //To do this, instead of an anonymous class, you can use a lambda expression
         System.out.println("Persons who are eligible for Selective service " + "(lambda expression):");
 
         printPersons(roster, (Person person) -> person.getGender() == Person.Sex.MALE
