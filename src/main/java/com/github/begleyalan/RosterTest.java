@@ -185,5 +185,19 @@ public class RosterTest {
                         && p.getAge() <= 25,
                 p -> p.getEmailAddress(),
                 email -> System.out.println(email));
+
+        System.out.println();
+
+        //Approach 9:  use bulk data operations that accept Lambda expressions as parameters
+        System.out.println("Persons who are eligible for selective service " + "(with bulk data operations):");
+
+        roster
+            .stream()
+            .filter(
+                    p -> p.getGender() == Person.Sex.MALE
+                                        && p.getAge() >= 18
+                                        && p.getAge() <= 25)
+            .map(p -> p.getEmailAddress())
+            .forEach(email -> System.out.println(email));
     }
 }
