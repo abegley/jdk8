@@ -94,6 +94,22 @@ public class RosterTest {
         printPersons(roster, new CheckPersonEligibleForSelectiveService());
 
         System.out.println();
+
+        //Approach 4:  Specify search criteria Code in an Anonymous Code
+        System.out.println("Persons who are eligible for Selective Service " + "(anonymous class):");
+
+        printPersons(roster, new CheckPerson() {
+            @Override
+            public boolean test(Person person) {
+                return person.getGender() == Person.Sex.MALE
+                        && person.getAge() >= 18
+                        && person.getAge() <= 25;
+            }
+        });
+
+        System.out.println();
+
+
     }
 
 }
