@@ -2,6 +2,7 @@ package com.github.begleyalan;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -45,7 +46,7 @@ public class RosterTest {
     }
 
     //Approach 6:  Use standard functional interfaces with Lambda expressions
-    public static void printPersons(List<Person> roster, Predicate<Person> tester){
+    public static void printPersonsWithPredicate(List<Person> roster, Predicate<Person> tester){
         for (Person person: roster){
             if(tester.test(person)){
                 person.printPerson();
@@ -58,6 +59,19 @@ public class RosterTest {
         for(Person person : roster){
             if(tester.test(person)){
                 block.accept(person);
+            }
+        }
+    }
+
+    //Approach 7: second example
+    public static void processPersonsWithFunctions(List<Person> roster,
+                                                   Predicate<Person> tester,
+                                                   Function<Person, String> mapper,
+                                                   Consumer<String> block){
+        for(Person person: roster){
+            if(tester.test(person)){
+                String data = mapper.apply(person);
+                block.accept(data);
             }
         }
     }
@@ -109,7 +123,44 @@ public class RosterTest {
 
         System.out.println();
 
+        //Approach 5:  Specify search criteria code with a Lambda expression
+        System.out.println("Persons who are eligible for Selective service " + "(lambda expression):");
 
-    }
+        printPersons(roster, (Person person) -> person.getGender() == Person.Sex.MALE
+                                                && person.getAge() >= 18
+                                                && person.getAge() <= 25);
+
+        System.out.println();
+
+        //Approach 6: Use Standard Functional interfaces with lambda expressions
+        System.out.println("Persons who are eligible for selective service " + "(with Predicate paramter):");
+
+        printPersonsWithPredicate(roster, p -> p.getGender() == Person.Sex.MALE
+                                                                && p.getAge() >= 18
+                                                                && p.getAge() <= 25);
+
+        System.out.println();
+
+        //Approach 7: Use Lambda expressions throughout your application
+        System.out.println("Persons who are eligible for selective service " + "(with predicate and consumer parameters)");
+
+        processPersons(roster, p -> p.getGender() == Person.Sex.MALE
+                                                    && p.getAge() >= 28
+                                                    && p.getAge() <= 25,
+                               p -> p.printPerson());
+
+        System.out.println();
+
+        //Approach 7: second example
+        System.out.println("Persons who are eligible for selective service " + "(with Predicate, Function and Consumer parameters)");
+
+        processPersonsWithFunctions(roster, p -> p.getGender() == Person.Sex.MALE
+                                                                && p.getAge() >= 18
+                                                                && p.getAge() <= 25,
+                                            p -> p.getEmailAddress(),
+                                            email -> System.out.println(email));
+
+        System.out.println();
+}
 
 }
