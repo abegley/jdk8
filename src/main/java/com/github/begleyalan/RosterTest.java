@@ -38,11 +38,11 @@ public class RosterTest {
     //Approach 5: Specify search criteria code with a lambda expression
 
     public static void printPersons(List<Person> roster, CheckPerson tester){
-       for(Person person: roster){
-          if(tester.test(person)){
-              person.printPerson();
-          }
-       }
+        for(Person person: roster){
+            if(tester.test(person)){
+                person.printPerson();
+            }
+        }
     }
 
     //Approach 6:  Use standard functional interfaces with Lambda expressions
@@ -76,6 +76,20 @@ public class RosterTest {
         }
     }
 
+    //Approach 8: Use generics more extensively
+    public static <X, Y> void processElements(
+            Iterable<X> source,
+            Predicate<X> tester,
+            Function<X, Y> mapper,
+            Consumer<Y> block){
+        for(X p : source){
+            if(tester.test(p)){
+                Y data = mapper.apply(p);
+                block.accept(data);
+            }
+        }
+    }
+
     public static void main(String... args){
         List<Person> roster = Person.createRoster();
 
@@ -100,8 +114,8 @@ public class RosterTest {
             @Override
             public boolean test(Person person) {
                 return person.getGender() == Person.Sex.MALE
-                            && person.getAge() >= 18
-                            && person.getAge() >= 25;
+                        && person.getAge() >= 18
+                        && person.getAge() >= 25;
             }
         }
 
@@ -127,8 +141,8 @@ public class RosterTest {
         System.out.println("Persons who are eligible for Selective service " + "(lambda expression):");
 
         printPersons(roster, (Person person) -> person.getGender() == Person.Sex.MALE
-                                                && person.getAge() >= 18
-                                                && person.getAge() <= 25);
+                && person.getAge() >= 18
+                && person.getAge() <= 25);
 
         System.out.println();
 
@@ -136,8 +150,8 @@ public class RosterTest {
         System.out.println("Persons who are eligible for selective service " + "(with Predicate paramter):");
 
         printPersonsWithPredicate(roster, p -> p.getGender() == Person.Sex.MALE
-                                                                && p.getAge() >= 18
-                                                                && p.getAge() <= 25);
+                && p.getAge() >= 18
+                && p.getAge() <= 25);
 
         System.out.println();
 
@@ -145,9 +159,9 @@ public class RosterTest {
         System.out.println("Persons who are eligible for selective service " + "(with predicate and consumer parameters)");
 
         processPersons(roster, p -> p.getGender() == Person.Sex.MALE
-                                                    && p.getAge() >= 28
-                                                    && p.getAge() <= 25,
-                               p -> p.printPerson());
+                        && p.getAge() >= 28
+                        && p.getAge() <= 25,
+                p -> p.printPerson());
 
         System.out.println();
 
@@ -155,12 +169,21 @@ public class RosterTest {
         System.out.println("Persons who are eligible for selective service " + "(with Predicate, Function and Consumer parameters)");
 
         processPersonsWithFunctions(roster, p -> p.getGender() == Person.Sex.MALE
-                                                                && p.getAge() >= 18
-                                                                && p.getAge() <= 25,
-                                            p -> p.getEmailAddress(),
-                                            email -> System.out.println(email));
+                        && p.getAge() >= 18
+                        && p.getAge() <= 25,
+                p -> p.getEmailAddress(),
+                email -> System.out.println(email));
 
         System.out.println();
-}
 
+        //Approach 8: Use Generics more extensively
+        System.out.println("Persons who are eligible for selective service " +"(generic version):");
+        processElements(
+                roster,
+                p -> p.getGender() == Person.Sex.MALE
+                        && p.getAge() >= 18
+                        && p.getAge() <= 25,
+                p -> p.getEmailAddress(),
+                email -> System.out.println(email));
+    }
 }
