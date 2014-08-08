@@ -12,7 +12,7 @@ import java.util.List;
 public class SomeCraic {
 
     public static void main(String [] args){
-        SomeCraic craic = new SomeCraic();
+        final SomeCraic craic = new SomeCraic();
         System.out.println(craic.reverseEveryOtherWord("Reverse"));
         System.out.println(craic.reverseEveryOtherWord("There is no place like home"));
         System.out.println(craic.reverseEveryOtherWord("Mary had a little lamb blah blah"));
@@ -29,7 +29,7 @@ public class SomeCraic {
     public final String reverseEveryOtherWord(final String words){
         final List<String> listOfWords = new ArrayList<String>(Arrays.asList(words.split(" ")));
         final StringBuilder result = new StringBuilder();
-        int numOfWords = listOfWords.size();
+        final int numOfWords = listOfWords.size();
         for(int i = 0; i <= numOfWords-1; i++){
             if(i % 2 == 0){
                 result.append(reverseWord(listOfWords.get(i)));
