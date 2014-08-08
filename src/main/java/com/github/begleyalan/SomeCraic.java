@@ -1,13 +1,13 @@
 package com.github.begleyalan;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by abegley on 07/08/2014.
+ * Interview question supplied to a Software Engineer. Reverse every other word in a String literal
+ * Implemented it for the craic! :)
  */
 public class SomeCraic {
 
@@ -43,9 +43,4 @@ public class SomeCraic {
         }
       return result.toString();
     }
-
-    private final String apacheCommons(String word){
-        return StringUtils.reverse(word);
-    }
-
 }
