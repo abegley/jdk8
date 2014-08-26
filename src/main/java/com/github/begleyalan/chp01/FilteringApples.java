@@ -15,19 +15,27 @@ public class FilteringApples {
                                                 new Apple(120, "red"));
 
             List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple);
+            System.out.println(greenApples);
+
+            List<Apple> heavyApples = filterApples(inventory, FilteringApples::isHeavyApple);
+            System.out.println(heavyApples);
+
 
 
     }
 
-    private static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> isGreenApple) {
+    private static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> predicate) {
         List<Apple> result = new ArrayList<>();
         for(Apple apple : inventory){
-            if(isGreenApple(apple)){
+            if(predicate.test(apple)){
                 result.add(apple);
-                System.out.println(apple);
             }
         }
         return result;
+    }
+
+    public static boolean isHeavyApple(Apple apple){
+        return apple.getWeight() > 150;
     }
 
     public static boolean isGreenApple(Apple apple){
