@@ -11,7 +11,7 @@
     <artifactId>functional-style-data-processing</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Archetype - functional-style-data-processing</name>
+    <name>functional-style-data-processing</name>
     <url>http://maven.apache.org</url>
 
   <modules>
