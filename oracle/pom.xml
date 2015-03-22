@@ -9,8 +9,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>oracle</artifactId>
-    <packaging>pom</packaging>
-    <name>Oracle-jdk8-examples</name>
+    <packaging>jar</packaging>
+    <name>oracle</name>
     <url>http://docs.oracle.com/javase/tutorial/java/javaOO/</url>
 
     <dependencies>
